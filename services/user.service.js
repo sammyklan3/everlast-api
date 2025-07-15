@@ -10,7 +10,7 @@ const getAllUsers = async () => {
   } catch (error) {
     throw new Error(error.message);
   }
-}
+};
 
 // Get user by ID
 const getUserById = async (id) => {
@@ -25,7 +25,7 @@ const getUserById = async (id) => {
   } catch (error) {
     throw new Error(error.message);
   }
-}
+};
 
 // Suspend a user account
 const suspendUser = async (id) => {
@@ -45,7 +45,7 @@ const suspendUser = async (id) => {
     await user.save();
     return user;
   } catch (error) {
-    throw new Error(error.message); 
+    throw new Error(error.message);
   }
 };
 

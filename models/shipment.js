@@ -45,6 +45,7 @@ const Shipment = sequelize.define("Shipment", {
     type: DataTypes.ENUM(
       "pending",
       "in_transit",
+      "delayed",
       "at_port",
       "clearing",
       "cleared",
