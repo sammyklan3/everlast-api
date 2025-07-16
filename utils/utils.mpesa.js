@@ -59,7 +59,7 @@ async function initiateSTKPush({
   const token = await getAccessToken();
   const { password, timestamp } = generatePassword();
   const parsedAmount = Math.round(parseFloat(amount));
-  
+
   const payload = {
     BusinessShortCode: process.env.MPESA_SHORTCODE,
     Password: password,
@@ -73,7 +73,6 @@ async function initiateSTKPush({
     AccountReference: accountReference,
     TransactionDesc: transactionDesc,
   };
-
 
   try {
     const response = await fetch(`${baseURL}/mpesa/stkpush/v1/processrequest`, {

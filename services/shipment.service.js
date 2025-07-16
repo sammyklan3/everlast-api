@@ -2,6 +2,7 @@ import User from "../models/user.js";
 import Shipment from "../models/shipment.js";
 import ShippingCompany from "../models/shippingCompany.js";
 import Port from "../models/port.js";
+import Invoice from "../models/invoice.js";
 
 // Function to create a new shipment
 async function createShipment({
@@ -122,6 +123,10 @@ async function getAllShipments() {
         as: "shippingCompany",
       },
       {
+        model: Invoice,
+        as: "invoice",
+      },
+      {
         model: Port,
         as: "entryPort",
       },
@@ -146,6 +151,10 @@ async function getShipmentById(id) {
         model: User,
         as: "agent",
         attributes: { exclude: ["password"] },
+      },
+      {
+        model: Invoice,
+        as: "invoice",
       },
       {
         model: ShippingCompany,

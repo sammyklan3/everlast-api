@@ -1,12 +1,13 @@
 import Invoice from "../models/invoice.js";
 import User from "../models/user.js";
 import Shipment from "../models/shipment.js";
+import Payment from "../models/payment.js";
 
 // Create a new invoice record
 const createInvoice = async ({
   shipmentId,
   amount,
-  currency = "USD",
+  currency,
   dueDate,
   notes,
 } = {}) => {
@@ -50,4 +51,38 @@ const createInvoice = async ({
   return invoice;
 };
 
-export { createInvoice };
+// Get all invoices
+const getAllInvoices = async () => {
+  return await Invoice.findAll({
+    include: [
+      {
+        model: User,
+        as: "client",
+        attributes: { exclude: ["password"] },
+      },
+      { model: Shipment, as: "shipment" },
+      { model: Payment, as: "payments" },
+    ],
+  });
+};
+
+// Get invoice by ID
+const getInvoiceById = async (id) => {
+  const invoice = await Invoice.findByPk(id, {
+    include: [
+      {
+        model: User,
+        as: "client",
+        attributes: { exclude: ["password"] },
+      },
+      { model: Shipment, as: "shipment" },
+      { model: Payment, as: "payments" },
+    ],
+  });
+  if (!invoice) {
+    throw new Error("Invoice not found");
+  }
+  return invoice;
+};
+
+export { createInvoice, getAllInvoices, getInvoiceById };
